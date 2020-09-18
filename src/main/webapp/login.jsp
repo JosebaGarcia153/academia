@@ -3,14 +3,14 @@
 	<jsp:param name="titulo" value="Login" />
 </jsp:include>
 
-<form action="login" method="post">
-
-	<input type="text" name="nombre" autofocus placeholder="Nombre">
-	<br/>
-	<input type="password" id="password" name="password" placeholder="Contraseña" required>
-	<br/>
-        
-	<input type="submit" value="Login" class="btn btn-primary">
-</form>
+	<form action="login" method="post">
+	
+		<input type="text" name="nombre" autofocus placeholder="Nombre">
+		<br/>
+		<input type="password" id="password" name="password" placeholder="Contraseña" required>
+		<br/>
+	        
+		<input type="submit" value="Login">
+	</form>
 
 <%@include file="include/footer.jsp" %>

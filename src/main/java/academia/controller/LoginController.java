@@ -47,17 +47,18 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("alerta", new Alerta("danger", "Informacion erronea"));
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			
-		} else {			
+		} else {
 
 			//Si esta el usuario entonces inicia una session de 50 minutos
 			session.setMaxInactiveInterval(60 * 1 * 50);
+			session.setAttribute("login_usuario", usuario); // @see ListenerUsuarioLogeados => attributeAdded
 			request.setAttribute("alerta", new Alerta("success", nombre + " estas logeado"));	
 			
 			//Va a una pagina u otra dependiendo del Rol
 			if (usuario.getRol() == usuario.ROL_PROFESOR) {
-				request.getRequestDispatcher("privado/profesor.jsp").forward(request, response);
+				request.getRequestDispatcher("profesor").forward(request, response);
 			} else {
-				request.getRequestDispatcher("privado/alumno.jsp").forward(request, response);
+				request.getRequestDispatcher("alumno").forward(request, response);
 			}
 		}//if
 	}

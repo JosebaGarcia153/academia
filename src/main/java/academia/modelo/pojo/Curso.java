@@ -1,16 +1,26 @@
 package academia.modelo.pojo;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Curso {
 	
 	private int id;
-	private String nombre;
-	private String identificador;
-	private int horas;
-	private Usuario profesor;
-	// TODO
-    // private ArrayList<Alumno> alumno
-
 	
+	@NotNull(message = "Nombre no puede ser null")
+	private String nombre;
+	
+	@NotNull(message = "Identificador no puede ser null")
+	@Size(min = 4, max = 4, message = "El identificador tiene que ser de 4 caracteres")
+	private String identificador;
+	
+	@NotNull(message = "Horas no pueden ser null")
+	@Min(value = 50, message = "Horas tiene que ser 50 o mas")
+	private int horas;
+	
+	private Usuario profesor;
+
 	
 	public Curso() {
 		super();

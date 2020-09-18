@@ -1,14 +1,27 @@
 package academia.modelo.pojo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Usuario {
 	
 	public static final int ROL_ALUMNO = 1;
 	public static final int ROL_PROFESOR = 2;
 	
 	private int id;
+	
+	@NotNull(message = "Nombre no puede ser null")
+	@Size(min = 3, max = 100, message = "Nombre tiene que tener entre 3 and 100 letras")
 	private String nombre;
+	
+	@NotNull(message = "Apellidos no pueden ser null")
+	@Size(min = 3, max = 100, message = "Apellidos tienen que tener entre 3 and 100 letras")
 	private String apellidos;
+	
 	private int rol;
+	
+	@NotNull(message = "Password no puede ser null")
+	@Size(min = 3, max = 10, message = "Password tiene que tener entre 6 and 10 letras")
 	private String password;
 	
 	public Usuario() {
