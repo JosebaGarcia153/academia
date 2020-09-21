@@ -7,7 +7,7 @@
 	
 	<h1>Agregar un nuevo curso</h1>
 	
-	<form action="crear-curso" method="post" enctype="multipart/form-data">
+	<form action="crear-curso" method="post">
 		
 		<div class="form-group">
 			<label for="nombre">Nombre:</label>

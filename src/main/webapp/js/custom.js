@@ -11,7 +11,7 @@ $(document).ready( function () {
 function confirmar(nombre) {
 	
 	// The confirm() method returns true if the user clicked "OK", and false otherwise. 
-	if ( confirm('Estas seguro de querer hacer esto ' + nombre + '?') ){
+	if ( confirm('¿Estas seguro de querer hacer esto?') ){
 		
 		console.debug(' continua el evento por defecto del ancla ');
 		
