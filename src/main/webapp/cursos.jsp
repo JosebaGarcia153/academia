@@ -3,8 +3,6 @@
 	<jsp:param name="titulo" value="Login" />
 </jsp:include>
 
-<jsp:include page="include/alertas.jsp"></jsp:include>
-
 	<main id="curso">
 	
 		<h1><a href="login.jsp">Login</a></h1>
