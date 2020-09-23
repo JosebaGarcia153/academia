@@ -8,14 +8,14 @@ public class Curso {
 	
 	private int id;
 	
-	@NotNull(message = "Nombre no puede ser null")
+	@NotNull(message = "Nombre no puede estar vacio")
 	private String nombre;
 	
-	@NotNull(message = "Identificador no puede ser null")
+	@NotNull(message = "Identificador no puede estar vacio")
 	@Size(min = 4, max = 4, message = "El identificador tiene que ser de 4 caracteres")
 	private String identificador;
 	
-	@NotNull(message = "Horas no pueden ser null")
+	@NotNull(message = "Horas no pueden estar vacio")
 	@Min(value = 50, message = "Horas tiene que ser 50 o mas")
 	private int horas;
 	

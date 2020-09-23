@@ -30,25 +30,30 @@ public class CursoDAOImpl implements CursoDAO {
 		return instance;
 	}
 	
-	private final static String SQL_LISTAR = "SELECT c.id 'curso_id', c.identificador, c.nombre 'curso_nombre', c.horas, u.id 'profesor_id', u.nombre 'profesor_nombre', u.apellidos as 'profesor_apellidos', rol "
-												+ " FROM cursos c, usuarios u "
-												+ " WHERE c.id_profesor = u.id "
+	private final static String SQL_LISTAR = "SELECT c.id 'curso_id', c.identificador, c.nombre 'curso_nombre', c.horas,"
+												+ " u.id 'profesor_id', CONCAT(u.nombre, ', ', u.apellidos) as 'profesor', rol,"
+												+ " (SELECT COUNT(id_alumno) FROM alumnos_curso WHERE id_curso = c.id GROUP BY (id_curso)) as 'numero_alumnos'" 
+												+ " FROM cursos c, usuarios u"
+												+ " WHERE c.id_profesor = u.id"
 												+ " ORDER BY c.id ASC LIMIT 500; ";
 	
 	
 	private final static String SQL_BUSCAR_POR_ID = "SELECT c.id 'curso_id', c.identificador, c.nombre 'curso_nombre', c.horas,"
-												+ " u.id 'profesor_id', u.nombre 'profesor_nombre', u.apellidos as 'profesor_apellidos', rol "
-												+ " FROM cursos c, usuarios u "
+												+ " u.id 'profesor_id', CONCAT(u.nombre, ', ', u.apellidos) as 'profesor', rol,"
+												+ " (SELECT COUNT(id_alumno) FROM alumnos_curso WHERE id_curso = c.id GROUP BY (id_curso)) as 'numero_alumnos'" 
+												+ " FROM cursos c, usuarios u"
 												+ " WHERE c.id_profesor = u.id AND c.id = ?"
 												+ " ORDER BY c.id ASC LIMIT 500; ";
 	
 	private final static String SQL_BUSCAR_POR_ID_CON_USUARIO = "SELECT c.id 'curso_id', c.identificador, c.nombre 'curso_nombre', c.horas,"
-												+ "u.id 'profesor_id', u.nombre 'profesor_nombre', u.apellidos as 'profesor_apellidos', rol "
+												+ " u.id 'profesor_id', CONCAT(u.nombre, ', ', u.apellidos) as 'profesor', rol "
+												+ " (SELECT COUNT(id_alumno) FROM alumnos_curso WHERE id_curso = c.id GROUP BY (id_curso)) as 'numero_alumnos'"
 												+ " FROM cursos c, usuarios u "
 												+ " WHERE c.id_profesor = u.id AND c.id = ? AND u.id = ?"
 												+ " ORDER BY c.id ASC LIMIT 500; ";
 	
-	private final static String SQL_CURSOS_POR_PROFESOR = "SELECT c.id, c.nombre, c.identificador, c.horas, CONCAT(u.nombre, ' ', u.apellidos) AS 'profesor'"
+	private final static String SQL_CURSOS_POR_PROFESOR = "SELECT c.id, c.nombre, c.identificador, c.horas, CONCAT(u.nombre, ', ', u.apellidos) AS 'profesor',"
+												+ " (SELECT COUNT(id_alumno) FROM alumnos_curso WHERE id_curso = c.id GROUP BY (id_curso)) as 'numero_alumnos'"
 												+ " FROM cursos c, usuarios u"
 												+ " WHERE c.id_profesor = u.id AND id_profesor = ?"
 												+ " ORDER BY c.id ASC LIMIT 500; ";
@@ -175,6 +180,7 @@ public class CursoDAOImpl implements CursoDAO {
 					c.setIdentificador(rs.getString("identificador"));
 					
 					u.setNombre(rs.getString("profesor"));
+					u.setNumeroAlumnos(rs.getInt("numero_alumnos"));
 					c.setProfesor(u);
 					
 					cursos.add(c);
@@ -373,8 +379,8 @@ public class CursoDAOImpl implements CursoDAO {
 		c.setIdentificador(rs.getString("identificador"));
 
 		u.setId(rs.getInt("profesor_id"));
-		u.setNombre(rs.getString("profesor_nombre"));
-		u.setApellidos(rs.getString("profesor_apellidos"));
+		u.setNombre(rs.getString("profesor"));
+		u.setNumeroAlumnos(rs.getInt("numero_alumnos"));
 		u.setRol(rs.getInt("rol"));
 		
 		c.setProfesor(u);

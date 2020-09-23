@@ -14,6 +14,7 @@
 				<td>Identificador</td>
 				<td>Horas</td>
 				<td>Profesor</td>
+				<td>Numero de alumnos</td>
 				<td>Operaciones</td>
 			</tr>
 		</thead>
@@ -24,6 +25,7 @@
 					<td>${c.identificador}</td>
 					<td>${c.horas}</td>
 					<td>${c.profesor.nombre}</td>
+					<td>${c.profesor.numeroAlumnos}</td>
 					<td>
 						<a href="borrar-curso?id=${c.id}" onclick="confirmar('${c.nombre}')">
 							<i class="fas fa-trash fa-2x" title="Borrar Curso"></i>

@@ -56,9 +56,9 @@ public class LoginController extends HttpServlet {
 			
 			//Va a una pagina u otra dependiendo del Rol
 			if (usuario.getRol() == usuario.ROL_PROFESOR) {
-				request.getRequestDispatcher("profesor").forward(request, response);
+				response.sendRedirect("profesor");
 			} else {
-				request.getRequestDispatcher("alumno").forward(request, response);
+				response.sendRedirect("alumno");
 			}
 		}//if
 	}
